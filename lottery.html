@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+
+<script>
+//regular numbers
+var nums = []
+while(nums.length < 5){
+    var r = Math.floor(Math.random()*48) + 1;
+    if(nums.indexOf(r) === -1) nums.push(r);
+}
+//lucky number
+var r = Math.floor(Math.random()*18) + 1;
+nums.push(r);
+document.write("Winning #s (unordered): ");
+
+//print numbers
+for (var x = 0; x < 5; x++){
+	document.write(nums[x]);
+	if (x < 4){
+		document.write("-");
+	}
+}
+</script>
+<br>
+<script>
+//print lucky
+document.write("Lucky Ball: ", nums[5]);
+
+</script>
+<br>
+<script>
+
+//sorting
+var sort = [];
+var counter = 0;
+for (var i = 1; i <=48; i++){
+	for (var j = 0; j < 5; j++){
+		if (nums[j] == i){
+			sort[counter] = i;
+			counter++;
+		}
+	}
+}
+
+//print sorted
+document.write("Winning #s (ordered): ");
+for (var x = 0; x < 5; x++){
+	document.write(sort[x]);
+	if (x < 4){
+		document.write("-");
+	}
+}
+</script>
+
+<br>
+<script>
+document.write("Lucky Ball: ", nums[5]);
+</script>
+
+<!-- input stuff  -->
+<form enternumbers>
+  Five Numbers:<br>
+  <input type="text" name="guesses" id="guesses" value="00 00 00 00 00">
+  <br>
+  Lucky Ball:<br>
+  <input type="text" name="lucky" id="lucky" value="00">
+  <br><br>
+  <button onclick="winCheck()">
+  	Check Winnings!
+  </button>
+</form> 
+
+<!-- checking if winner and display  -->
+<script>
+function winCheck(){
+
+	var numbers = document.getElementById("guesses").value;
+	var lucky = document.getElementById("lucky").value;
+	
+	//lucky number check
+	var luckcheck = 0;
+	if (lucky == nums[5]){
+		luckcheck = 1;
+	}
+
+	//regular numbers check
+	var numcheck = 0;
+	var guess = numbers.split(" ");
+	for (var i = 0; i < 5; i++){
+		for (var j = 0; j < 5; j++){
+			if (guess[i] == nums[j]){
+				numcheck++;
+			}
+		}
+	}
+
+	var payout = 0;
+	if (numcheck == 0){
+		if (luckcheck == 1){
+			alert("Prize: $4")
+		}
+		else {
+			alert("Not a winner")
+		}
+	}
+	else if (numcheck == 1){
+		if (luckcheck == 1){
+			alert("Prize: $6")
+		}
+		else {
+			alert("Not a winner")
+		}
+	}
+	else if (numcheck == 2){
+		if (luckcheck == 1){
+			alert("Prize: $25")
+		}
+		else {
+			alert("Prize: $3")
+		}
+	}
+	else if (numcheck == 3){
+		if (luckcheck == 1){
+			alert("Prize: $150")
+		}
+		else {
+			alert("Prize: $20")
+		}
+	}
+	else if (numcheck == 4){
+		if (luckcheck == 1){
+			alert("Prize: $5,000")
+		}
+		else {
+			alert("Prize: $200")
+		}
+	}
+	else if (numcheck == 5){
+		if (luckcheck == 1){
+			alert("Prize: $7,000 a WEEK for LIFE!")
+		}
+		else {
+			alert("Prize: $25,000 a YEAR for LIFE!")
+		}
+	}
+}
+</script>
+
+</body>
+</html>
